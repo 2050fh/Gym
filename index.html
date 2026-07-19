@@ -80,6 +80,14 @@
     align-items: center;
   }
 
+  .day-header.no-gym {
+    background: linear-gradient(135deg, #00d2d3, #01a3a4);
+  }
+
+  .day-header.moved {
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+  }
+
   .day-header .arrow { transition: 0.3s; }
   .day-header.open .arrow { transform: rotate(180deg); }
 
@@ -116,6 +124,7 @@
   .badge-core { background: #9b59b633; color: #bb8fce; }
   .badge-aesthetic { background: #FF6B6B33; color: #FF6B6B; }
   .badge-cardio { background: #00d2d333; color: #00d2d3; }
+  .badge-moved { background: #f39c1233; color: #f39c12; }
 
   .info-box {
     background: #24243e;
@@ -140,6 +149,16 @@
   .success-box {
     background: #2ecc7122;
     border-right: 4px solid #2ecc71;
+    padding: 16px 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  .gym-closed-box {
+    background: #f39c1222;
+    border-right: 4px solid #f39c12;
     padding: 16px 20px;
     border-radius: 10px;
     margin-bottom: 20px;
@@ -172,21 +191,27 @@
     padding-bottom: 10px;
   }
 
-  .muscle-priority {
-    display: flex;
-    align-items: center;
+  .week-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     gap: 10px;
-    background: #1e1e35;
-    padding: 12px 16px;
-    border-radius: 10px;
-    margin-bottom: 8px;
+    margin-bottom: 25px;
   }
 
-  .priority-bar {
-    height: 8px;
-    border-radius: 4px;
-    background: linear-gradient(90deg, #FF6B6B, #C44569);
+  .day-chip {
+    background: #1e1e35;
+    padding: 14px 8px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 12px;
   }
+
+  .day-chip.gym { border-top: 3px solid #FF6B6B; }
+  .day-chip.no-gym { border-top: 3px solid #00d2d3; }
+  .day-chip.rest { border-top: 3px solid #7a7a9a; }
+
+  .day-chip .day-name { font-weight: bold; margin-bottom: 5px; }
+  .day-chip .day-focus { color: #b8b8d1; font-size: 10px; }
 
   footer { text-align: center; padding: 30px 20px; color: #7a7a9a; font-size: 13px; }
 
@@ -201,11 +226,11 @@
 
 <header>
   <h1>🔥 برنامج الجسم الجذاب</h1>
-  <p>حديد + كارديو ذكي = عضلات مرسومة وتناسق مثالي (V-Taper)</p>
+  <p>محدّث: الجمعة الجيم مغلق - تم إعادة الترتيب ✅</p>
 </header>
 
 <div class="tabs">
-  <button class="tab-btn active" onclick="showTab('philosophy')">🎯 الفلسفة</button>
+  <button class="tab-btn active" onclick="showTab('overview')">📅 نظرة عامة</button>
   <button class="tab-btn" onclick="showTab('gym')">💪 الحديد</button>
   <button class="tab-btn" onclick="showTab('cardio')">🔥 الكارديو</button>
   <button class="tab-btn" onclick="showTab('nutrition')">🍎 التغذية</button>
@@ -213,78 +238,57 @@
 
 <div class="container">
 
-  <!-- ================= PHILOSOPHY TAB ================= -->
-  <div id="philosophy" class="tab-content active">
+  <!-- ================= OVERVIEW TAB ================= -->
+  <div id="overview" class="tab-content active">
 
-    <h2 class="section-title">🎯 لماذا هذا البرنامج مختلف؟</h2>
-
-    <div class="info-box">
-      <strong>الفرق بين "الضخامة" و"الجسم الجذاب":</strong><br><br>
-      🏋️ <strong>بناء الأجسام التقليدي:</strong> كتلة عضلية كبيرة، حجم أهم من الشكل<br>
-      ✨ <strong>الجسم الجذاب (Model Physique):</strong> أكتاف عريضة + خصر ضيق + عضلات مرسومة + نسبة دهون منخفضة (10-14%)
+    <div class="gym-closed-box">
+      ⚠️ <strong>تنبيه مهم:</strong> الجيم مغلق يوم الجمعة، لذلك تم نقل يوم "الأكتاف المكثفة" من الجمعة إلى <strong>السبت</strong>، ووضعنا الجري (الذي لا يحتاج جيم) في الجمعة بدلاً منه.
     </div>
 
-    <h2 class="section-title">📐 أولويات العضلات (من الأهم للأقل)</h2>
+    <h2 class="section-title">📅 الجدول الأسبوعي الكامل</h2>
 
-    <div class="muscle-priority">
-      <span style="width:120px">🎯 الأكتاف</span>
-      <div class="priority-bar" style="width:95%"></div>
-      <span>95%</span>
+    <div class="week-overview">
+      <div class="day-chip gym">
+        <div class="day-name">الإثنين</div>
+        <div class="day-focus">💪 Push</div>
+      </div>
+      <div class="day-chip gym">
+        <div class="day-name">الثلاثاء</div>
+        <div class="day-focus">🔙 Pull</div>
+      </div>
+      <div class="day-chip no-gym">
+        <div class="day-name">الأربعاء</div>
+        <div class="day-focus">🔥 HIIT+بطن</div>
+      </div>
+      <div class="day-chip gym">
+        <div class="day-name">الخميس</div>
+        <div class="day-focus">🦵 أرجل</div>
+      </div>
+      <div class="day-chip no-gym">
+        <div class="day-name">الجمعة</div>
+        <div class="day-focus">🏃 جري (جيم مغلق)</div>
+      </div>
+      <div class="day-chip gym">
+        <div class="day-name">السبت</div>
+        <div class="day-focus">🎯 أكتاف (منقول)</div>
+      </div>
+      <div class="day-chip rest">
+        <div class="day-name">الأحد</div>
+        <div class="day-focus">😴 راحة</div>
+      </div>
     </div>
-    <div class="muscle-priority">
-      <span style="width:120px">🔙 الظهر (عرض)</span>
-      <div class="priority-bar" style="width:90%"></div>
-      <span>90%</span>
-    </div>
-    <div class="muscle-priority">
-      <span style="width:120px">🎯 البطن</span>
-      <div class="priority-bar" style="width:90%"></div>
-      <span>90%</span>
-    </div>
-    <div class="muscle-priority">
-      <span style="width:120px">💪 الصدر</span>
-      <div class="priority-bar" style="width:80%"></div>
-      <span>80%</span>
-    </div>
-    <div class="muscle-priority">
-      <span style="width:120px">💪 الذراعين</span>
-      <div class="priority-bar" style="width:70%"></div>
-      <span>70%</span>
-    </div>
-    <div class="muscle-priority">
-      <span style="width:120px">🦵 الأرجل</span>
-      <div class="priority-bar" style="width:60%"></div>
-      <span>60% (متوازن - ليس ضخماً)</span>
-    </div>
-
-    <div class="warning-box">
-      ⚠️ <strong>لماذا الأكتاف أهم شيء؟</strong><br>
-      الأكتاف العريضة تخلق تأثير "V-Taper" (كتفين عريضين + خصر ضيق) وهو المظهر الأكثر جاذبية بصرياً للجسم الرجالي - أهم من ضخامة الصدر أو الذراع.
-    </div>
-
-    <h2 class="section-title">⚡ استراتيجية الكارديو الذكية</h2>
 
     <div class="success-box">
-      ✅ <strong>لماذا HIIT بدلاً من الجري الطويل فقط؟</strong><br>
-      الجري الطويل جداً (أكثر من 30 دقيقة) بشكل متكرر مع رفع الأثقال قد "يأكل" العضل (Muscle Interference Effect). 
-      HIIT (تمارين متقطعة عالية الشدة) تحرق دهون أكثر بوقت أقل، وتحافظ على العضل بشكل أفضل.
+      ✅ <strong>لماذا هذا الترتيب الجديد أفضل؟</strong><br>
+      - أيام الجيم (Push/Pull/Legs/Shoulders) موزعة بشكل متوازن مع راحة بينها<br>
+      - يوم الجمعة (جيم مغلق) نستغله للجري الذي لا يحتاج معدات<br>
+      - يوم الأكتاف بقي مكثفاً وحصل على راحة كافية بعد الأرجل (خميس→سبت)
     </div>
 
-    <h2 class="section-title">📊 الخطة الزمنية للنتائج</h2>
+    <h2 class="section-title">🎯 تذكير بأولويات العضلات</h2>
 
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="value">4-6 أسابيع</div>
-        <div class="label">أول تغيرات ملحوظة</div>
-      </div>
-      <div class="stat-card">
-        <div class="value">8-12 أسبوع</div>
-        <div class="label">تحول واضح في الشكل</div>
-      </div>
-      <div class="stat-card">
-        <div class="value">4-6 أشهر</div>
-        <div class="label">جسم "جاهز" بالكامل</div>
-      </div>
+    <div class="info-box">
+      🎯 الأكتاف (أهم شيء) → 🔙 عرض الظهر → 🎯 البطن → 💪 الصدر → 💪 الذراعين → 🦵 الأرجل (متوازنة)
     </div>
 
   </div>
@@ -293,9 +297,7 @@
   <div id="gym" class="tab-content">
 
     <div class="info-box">
-      <strong>📈 مبدأ التدريب هنا:</strong><br>
-      تكرارات أعلى (10-15) مع أوزان متوسطة = رسم عضلي أفضل من التكرارات المنخفضة الثقيلة جداً.
-      الهدف: Definition وليس القوة القصوى فقط.
+      <strong>📈 مبدأ التدريب:</strong> تكرارات متوسطة-عالية (10-15) لرسم عضلي أفضل بدلاً من الضخامة الخام.
     </div>
 
     <!-- DAY 1: PUSH -->
@@ -338,22 +340,22 @@
       </div>
     </div>
 
-    <!-- DAY 3: HIIT + ABS (separate tab reference) -->
+    <!-- DAY 3: HIIT + ABS (NO GYM) -->
     <div class="day-card">
-      <div class="day-header" onclick="toggleDay(this)">
-        <span>الأربعاء - HIIT + بطن (راجع تبويب الكارديو)</span>
+      <div class="day-header no-gym" onclick="toggleDay(this)">
+        <span>الأربعاء - HIIT + بطن (لا يحتاج جيم)</span>
         <span class="arrow">▼</span>
       </div>
       <div class="day-body">
         <table>
           <tr><th>التمرين</th><th>النوع</th><th>مجموعات</th><th>تكرارات</th></tr>
           <tr><td>Hanging Leg Raise</td><td><span class="badge badge-core">بطن سفلي</span></td><td>4</td><td>12-15</td></tr>
-          <tr><td>Cable Crunch</td><td><span class="badge badge-core">بطن علوي</span></td><td>4</td><td>15-20</td></tr>
+          <tr><td>Cable Crunch (أو V-Ups منزلياً)</td><td><span class="badge badge-core">بطن علوي</span></td><td>4</td><td>15-20</td></tr>
           <tr><td>Russian Twist</td><td><span class="badge badge-core">مائل (Obliques)</span></td><td>3</td><td>20</td></tr>
           <tr><td>Plank</td><td><span class="badge badge-core">ثبات</span></td><td>3</td><td>60 ثانية</td></tr>
         </table>
         <p style="padding:12px 20px; font-size:13px; color:#b8b8d1;">
-          💡 نفذ HIIT (تفاصيله في تبويب الكارديو) بعد تمارين البطن مباشرة
+          💡 نفذ HIIT (تفاصيله في تبويب الكارديو) بعد تمارين البطن - يمكن تنفيذه في الحديقة/الشارع
         </p>
       </div>
     </div>
@@ -377,10 +379,26 @@
       </div>
     </div>
 
-    <!-- DAY 5: SHOULDERS SPECIALIZATION -->
+    <!-- FRIDAY NOTICE -->
     <div class="day-card">
-      <div class="day-header" onclick="toggleDay(this)">
-        <span>الجمعة - أكتاف مكثفة + بطن (يوم التميز)</span>
+      <div class="day-header no-gym" onclick="toggleDay(this)">
+        <span>الجمعة - 🚫 الجيم مغلق (راجع تبويب الكارديو)</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="day-body">
+        <div style="padding:16px 20px;">
+          <p style="font-size:14px; line-height:1.8;">
+            🏃 هذا اليوم مخصص للجري الهادئ + الإطالة (Stretching) بدلاً من الجيم.<br>
+            التفاصيل الكاملة موجودة في تبويب <strong>"الكارديو"</strong>.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 5: SHOULDERS (MOVED TO SATURDAY) -->
+    <div class="day-card">
+      <div class="day-header moved" onclick="toggleDay(this)">
+        <span>السبت - أكتاف مكثفة + بطن <span class="badge badge-moved">منقول من الجمعة</span></span>
         <span class="arrow">▼</span>
       </div>
       <div class="day-body">
@@ -398,7 +416,7 @@
     </div>
 
     <div class="info-box">
-      <strong>😴 أيام الراحة/الكارديو:</strong> السبت (كارديو هادئ - راجع التبويب) - الأحد (راحة كاملة)
+      <strong>😴 يوم الراحة:</strong> الأحد (راحة كاملة)
     </div>
 
   </div>
@@ -406,15 +424,15 @@
   <!-- ================= CARDIO TAB ================= -->
   <div id="cardio" class="tab-content">
 
-    <h2 class="section-title">🔥 استراتيجية الكارديو للجسم الجذاب</h2>
+    <h2 class="section-title">🔥 استراتيجية الكارديو</h2>
 
-    <div class="success-box">
-      <strong>القاعدة:</strong> HIIT مرتين أسبوعياً (حرق دهون سريع + حفاظ على العضل) + جري هادئ مرة واحدة (صحة القلب)
+    <div class="gym-closed-box">
+      💡 <strong>ملاحظة:</strong> كل التمارين في هذا التبويب لا تحتاج جيم - يمكن تنفيذها في الشارع، الحديقة، أو المنزل.
     </div>
 
     <!-- HIIT SESSION -->
     <div class="day-card">
-      <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-header no-gym" onclick="toggleDay(this)">
         <span>الأربعاء - HIIT (بعد تمارين البطن مباشرة)</span>
         <span class="arrow">▼</span>
       </div>
@@ -430,43 +448,28 @@
       </div>
     </div>
 
-    <!-- HIIT SESSION 2 -->
+    <!-- FRIDAY: RUN (moved here since gym closed) -->
     <div class="day-card">
-      <div class="day-header" onclick="toggleDay(this)">
-        <span>الجمعة (مساءً) - HIIT ثانية (اختياري لتسريع النتائج)</span>
-        <span class="arrow">▼</span>
-      </div>
-      <div class="day-body">
-        <table>
-          <tr><th>المرحلة</th><th>التفاصيل</th></tr>
-          <tr><td>إحماء</td><td>5 دقائق</td></tr>
-          <tr><td>Sprints</td><td>20 ثانية أقصى سرعة / 40 ثانية راحة × 10 مرات</td></tr>
-          <tr><td>تهدئة</td><td>5 دقائق</td></tr>
-        </table>
-        <p style="padding:12px 20px; font-size:13px; color:#b8b8d1;">
-          💡 فقط إذا كان هدفك خسارة دهون بسرعة أكبر - راقب مستوى تعافيك
-        </p>
-      </div>
-    </div>
-
-    <!-- STEADY RUN -->
-    <div class="day-card">
-      <div class="day-header" onclick="toggleDay(this)">
-        <span>السبت - جري هادئ (صحة القلب + تعافي نشط)</span>
+      <div class="day-header moved" onclick="toggleDay(this)">
+        <span>الجمعة - جري هادئ + إطالة <span class="badge badge-moved">بديل الجيم</span></span>
         <span class="arrow">▼</span>
       </div>
       <div class="day-body">
         <table>
           <tr><th>التفاصيل</th><th>القيمة</th></tr>
-          <tr><td>المسافة</td><td>3-5 كم (حسب مستواك الحالي)</td></tr>
-          <tr><td>الوتيرة</td><td>هادئة جداً - يمكنك التحدث أثناء الجري</td></tr>
-          <tr><td>الهدف</td><td>تعافي نشط + صحة قلب - ليس للأداء</td></tr>
+          <tr><td>المسافة</td><td>4-5 كم</td></tr>
+          <tr><td>الوتيرة</td><td>هادئة - يمكنك التحدث أثناء الجري</td></tr>
+          <tr><td>بعد الجري</td><td>15 دقيقة إطالة شاملة لكل الجسم (Stretching)</td></tr>
+          <tr><td>الهدف</td><td>تعافي نشط + صحة القلب + مرونة العضلات</td></tr>
         </table>
+        <p style="padding:12px 20px; font-size:13px; color:#b8b8d1;">
+          💡 هذا اليوم يعوض إغلاق الجيم بشكل مثالي - جسمك يحتاج هذا النوع من الراحة النشطة بين يوم الأرجل (خميس) ويوم الأكتاف (سبت)
+        </p>
       </div>
     </div>
 
     <div class="warning-box">
-      ⚠️ <strong>تحذير:</strong> لا تجمع أكثر من 3 جلسات كارديو أسبوعياً في هذه المرحلة - الأولوية للحديد لبناء العضل. الكارديو الزائد سيبطئ نتائجك.
+      ⚠️ <strong>تحذير:</strong> لا تضف تمارين HIIT إضافية يوم الجمعة - هذا اليوم للتعافي قبل يوم الأكتاف المكثف في السبت.
     </div>
 
   </div>
@@ -477,7 +480,7 @@
     <h2 class="section-title">🍎 التغذية لـ Body Recomposition</h2>
 
     <div class="info-box">
-      <strong>الهدف:</strong> خسارة دهون + بناء عضل بنفس الوقت (ممكن إذا كنت مبتدئ أو متوسط الخبرة في التدريب)
+      <strong>الهدف:</strong> خسارة دهون + بناء عضل بنفس الوقت
     </div>
 
     <div class="day-card">
@@ -489,8 +492,8 @@
         <table>
           <tr><th>الخطوة</th><th>الحساب</th></tr>
           <tr><td>1. السعرات الأساسية (BMR)</td><td>وزنك (كغ) × 24</td></tr>
-          <tr><td>2. عامل النشاط</td><td>× 1.5 (نشاط متوسط - تدريب 5-6 أيام)</td></tr>
-          <tr><td>3. للـ Recomposition</td><td>اطرح 300-400 سعرة من الناتج</td></tr>
+          <tr><td>2. عامل النشاط</td><td>× 1.5 (نشاط متوسط)</td></tr>
+          <tr><td>3. للـ Recomposition</td><td>اطرح 300-400 سعرة</td></tr>
           <tr><td>4. البروتين اليومي</td><td>2-2.2 غرام × وزنك (كغ)</td></tr>
           <tr><td>5. الماء</td><td>3 لتر يومياً على الأقل</td></tr>
         </table>
@@ -505,40 +508,17 @@
       <div class="day-body">
         <table>
           <tr><th>الوجبة</th><th>المحتوى</th></tr>
-          <tr><td>الفطور</td><td>بروتين (بيض/زبادي يوناني) + كربوهيدرات معقدة (شوفان)</td></tr>
-          <tr><td>ما قبل التمرين</td><td>كربوهيدرات سريعة (موز) + قهوة (اختياري)</td></tr>
-          <tr><td>بعد التمرين مباشرة</td><td>بروتين سريع الامتصاص (Whey) + كربوهيدرات</td></tr>
-          <tr><td>الغداء</td><td>بروتين (دجاج/سمك/لحم) + خضار + كربوهيدرات معتدلة</td></tr>
-          <tr><td>العشاء</td><td>بروتين + خضار (كربوهيدرات أقل مساءً)</td></tr>
-        </table>
-      </div>
-    </div>
-
-    <div class="day-card">
-      <div class="day-header" onclick="toggleDay(this)">
-        <span>أطعمة يجب تجنبها/تقليلها</span>
-        <span class="arrow">▼</span>
-      </div>
-      <div class="day-body">
-        <table>
-          <tr><th>الطعام</th><th>السبب</th></tr>
-          <tr><td>السكريات المصنعة</td><td>تخزن كدهون بسرعة</td></tr>
-          <tr><td>المشروبات الغازية</td><td>سعرات فارغة</td></tr>
-          <tr><td>الأطعمة المقلية</td><td>دهون غير صحية زائدة</td></tr>
-          <tr><td>الكحول</td><td>يبطئ حرق الدهون وبناء العضل</td></tr>
+          <tr><td>الفطور</td><td>بروتين (بيض/زبادي يوناني) + شوفان</td></tr>
+          <tr><td>ما قبل التمرين</td><td>موز + قهوة (اختياري)</td></tr>
+          <tr><td>بعد التمرين</td><td>Whey + كربوهيدرات سريعة</td></tr>
+          <tr><td>الغداء</td><td>بروتين + خضار + كربوهيدرات معتدلة</td></tr>
+          <tr><td>العشاء</td><td>بروتين + خضار (كربوهيدرات أقل)</td></tr>
         </table>
       </div>
     </div>
 
     <div class="success-box">
-      ✅ <strong>نصيحة ذهبية:</strong> التزم بـ80% من وجباتك نظيفة و20% مرونة (Flexible Dieting) - هذا يضمن استمرارية طويلة المدى بدون إحباط.
-    </div>
-
-    <h2 class="section-title">📊 متابعة التقدم</h2>
-
-    <div class="info-box">
-      قِس نفسك كل أسبوعين (وليس يومياً):<br>
-      📏 محيط الخصر - 📸 صور من زوايا مختلفة - ⚖️ الوزن (كمؤشر عام فقط) - 💪 قوة الأداء في التمارين
+      ✅ <strong>نصيحة ذهبية:</strong> 80% وجبات نظيفة + 20% مرونة = استمرارية طويلة المدى
     </div>
 
   </div>
@@ -546,7 +526,7 @@
 </div>
 
 <footer>
-  🔥 جسم الموديل يُبنى بالانضباط، ليس بالسرعة - التزم بالخطة 12 أسبوع كاملة قبل الحكم على النتائج 💪
+  🔥 جسم الموديل يُبنى بالانضباط - التزم بالخطة المعدّلة 12 أسبوع كاملة 💪
 </footer>
 
 <script>
